@@ -8,30 +8,22 @@ public class Boid : MonoBehaviour
     public Vector3 accel;
     public Vector3 force;
     public Vector3 worldPos;
-
     public float mass = 1.0f;
-
     public float maxSpeed = 5;
     public float maxForce = 10;
-
     public float speed = 0;
-
     public Vector3 target;
     public Transform[] targetTransforms;
     public Renderer targetRend;
     public float slowingDistance = 10;
-
     public Material greenMat;
-
-    [Range(0.0f, 10.0f)]
     public float bankForce = 0.1f;
-
     public float damping = 0.1f;
-
+    public LightSpawner ls;
 
     private void Start()
     {
-        
+        ls = GameObject.Find("Origin").GetComponent<LightSpawner>();
     }
    
     public void OnDrawGizmos()
@@ -58,17 +50,18 @@ public class Boid : MonoBehaviour
     {
         for (int i = 0; i < targetTransforms.Length; i++)
         {
+            targetTransforms[i] = ls.spawnLights().GetComponent<Transform>();
             targetRend = targetTransforms[i].gameObject.GetComponent<Renderer>();
             if (target != null)
             {
-                if (targetRend.material = greenMat)
-                {
+             //   if (targetRend.material = greenMat)
+              //  {
                     target = targetTransforms[i].position;
-                }
-                else
-                {
+               // }
+                //else
+               // {
 
-                }
+                //}
             }
         }
         worldPos = transform.position + vel;

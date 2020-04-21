@@ -15,13 +15,10 @@ public class Boid : MonoBehaviour
     public Vector3 target;
     public Transform[] targetTransforms;
     public Renderer targetRend;
-    public float slowingDistance = 10;
-    public Material greenMat;
+    //public float slowingDistance = 10;
     public float bankForce = 0.1f;
     public float damping = 0.1f;
     public LightSpawner ls;
-    public State greenState;
-
     private void Start()
     {
         ls = GameObject.Find("Origin").GetComponent<LightSpawner>();
@@ -51,34 +48,30 @@ public class Boid : MonoBehaviour
     {
         for (int i = 0; i < targetTransforms.Length; i++)
         {
-            targetTransforms[i] = ls.spawnLights().GetComponent<Transform>();
-            //greenState = targetTransforms[i].gameObject.GetComponent<LightController>().states[0];
+            targetTransforms[i] = ls.spawnLights()[i];
+        }
+        for (int i = 0; i < targetTransforms.Length; i++)
+        {
             targetRend = targetTransforms[i].gameObject.GetComponent<Renderer>();
-            if (target != null)
+            if (targetTransforms[i].GetComponent<Renderer>().material.color == Color.green)
             {
-              //  if (targetTransforms[i].GetComponent<LightStateMachine>().currentState == greenState)
-                //{
-                    target = targetTransforms[i].position;
-                }
-                else
-                {
-
-                }
+                target = targetTransforms[i].position;
             }
-            worldPos = transform.position + vel;
-            speed = vel.magnitude;
-            force = CalculateForce();
-            accel = force / mass;
-            vel += accel * Time.deltaTime;
-
-            transform.position += vel * Time.deltaTime;
-            if (speed > 0)
+            else
             {
-                Vector3 tempUp = Vector3.Lerp(transform.up, Vector3.up + (accel * bankForce), Time.deltaTime * 3.0f);
-                transform.LookAt(worldPos, tempUp);
-                vel -= (damping * vel * Time.deltaTime);
-
 
             }
         }
+        worldPos = transform.position + vel;
+        speed = vel.magnitude;
+        force = CalculateForce();
+        accel = force / mass;
+        vel += accel * Time.deltaTime;
+
+        transform.position += vel * Time.deltaTime;
+        transform.LookAt(target, Vector3.up);
+        vel -= (damping * vel * Time.deltaTime);
+
+
     }
+}

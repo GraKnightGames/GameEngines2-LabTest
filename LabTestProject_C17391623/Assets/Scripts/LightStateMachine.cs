@@ -15,7 +15,14 @@ public class LightStateMachine : MonoBehaviour
     public State prevState;
     private void OnEnable()
     {
-        StartCoroutine(Execute());
+        if (GetComponent<Renderer>().material.color == Color.yellow)
+        {
+            StartCoroutine(Execute(4f));
+        }
+        else
+        {
+            StartCoroutine(Execute(Random.Range(1f, 5f)));
+        }
     }
 
     // Update is called once per frame
@@ -34,16 +41,16 @@ public class LightStateMachine : MonoBehaviour
         currentState.owner = this;
         currentState.Enter();
     }
-    IEnumerator Execute()
+    IEnumerator Execute(float timeToWait)
     {
-        yield return new WaitForSeconds(Random.Range(5f,10f));
+        yield return new WaitForSeconds(timeToWait);
         while(true)
         {
             if(currentState != null)
             {
                 currentState.Execute();
             }
-            yield return new WaitForSeconds(Random.Range(5f,10f));
+            yield return new WaitForSeconds(timeToWait);
         }
     }
 }

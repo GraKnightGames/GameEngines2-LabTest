@@ -17,11 +17,11 @@ public class LightController : MonoBehaviour
         }
         public override void Execute()
         {
-                owner.ChangeState(new YellowState());
+            owner.ChangeState(new YellowState());
         }
         public override void Exit()
         {
-            
+
         }
     }
     public class YellowState : State
@@ -39,7 +39,7 @@ public class LightController : MonoBehaviour
         }
         public override void Exit()
         {
-           
+
         }
     }
     public class RedState : State
@@ -53,7 +53,7 @@ public class LightController : MonoBehaviour
         }
         public override void Execute()
         {
-                owner.ChangeState(new GreenState());
+            owner.ChangeState(new GreenState());
         }
         public override void Exit()
         {
@@ -69,7 +69,7 @@ public class LightController : MonoBehaviour
         {
             GetComponent<LightStateMachine>().ChangeState(new GreenState());
         }
-        else if(randomNum >= 3 && randomNum <= 6)
+        else if (randomNum >= 3 && randomNum <= 6)
         {
             GetComponent<LightStateMachine>().ChangeState(new YellowState());
         }
@@ -77,10 +77,5 @@ public class LightController : MonoBehaviour
         {
             GetComponent<LightStateMachine>().ChangeState(new RedState());
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 }

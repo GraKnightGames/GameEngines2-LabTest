@@ -15,9 +15,10 @@ public class LightSpawner : MonoBehaviour
     private Transform origin;
     private Vector3 finalDir;
     [SerializeField] private GameObject lightPrefab;
-    public GameObject instantiatedPrefab;
+    public Transform instantiatedPrefab;
     private Boid car;
     private int lightsSpawned;
+    public Transform[] lights = new Transform[10];
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,7 @@ public class LightSpawner : MonoBehaviour
         angleGap = fullCircle / lightsCount; //Calculates the angle between each light
     }
 
-    public GameObject spawnLights()
+    public Transform[] spawnLights()
     {
         if (lightsSpawned < car.targetTransforms.Length)
         {
@@ -39,8 +40,9 @@ public class LightSpawner : MonoBehaviour
                 dir = rot * Vector3.forward;
                 finalDir = dir * rad;
                 pos = origin.position + finalDir;
-                instantiatedPrefab = Instantiate(lightPrefab, pos, rot);
+                instantiatedPrefab = Instantiate(lightPrefab, pos, rot).GetComponent<Transform>();
                 instantiatedPrefab.GetComponent<LightController>().myRend = instantiatedPrefab.GetComponent<Renderer>();
+                lights[i] = instantiatedPrefab;
                 lightsSpawned++;
             }
         }
@@ -48,6 +50,6 @@ public class LightSpawner : MonoBehaviour
         {
 
         }
-        return instantiatedPrefab;
+        return lights;
     }
 }

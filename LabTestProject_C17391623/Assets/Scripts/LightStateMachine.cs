@@ -17,11 +17,11 @@ public class LightStateMachine : MonoBehaviour
     {
         if (GetComponent<Renderer>().material.color == Color.yellow)
         {
-            StartCoroutine(Execute(4f));
+            StartCoroutine(Execute(4.0f));
         }
         else
         {
-            StartCoroutine(Execute(Random.Range(1f, 5f)));
+            StartCoroutine(Execute(Random.Range(1.0f, 5.0f)));
         }
     }
 

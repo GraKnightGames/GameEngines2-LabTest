@@ -1,4 +1,4 @@
-# GameEngines2-LabTest-C17391623
+# GameEngines2-LabTest
 Resources Used:
 
 Andypot (2018). "[SOLVED]Instantiate prefabs in a circle", Unity Answers. Available at: https://answers.unity.com/questions/1527538/instantiate-prefabs-in-a-circle.html [Accessed 21/04/20]

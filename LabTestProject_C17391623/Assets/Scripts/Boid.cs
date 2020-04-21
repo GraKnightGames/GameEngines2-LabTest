@@ -62,7 +62,6 @@ public class Boid : MonoBehaviour
 
             }
         }
-        worldPos = transform.position + vel;
         speed = vel.magnitude;
         force = CalculateForce();
         accel = force / mass;

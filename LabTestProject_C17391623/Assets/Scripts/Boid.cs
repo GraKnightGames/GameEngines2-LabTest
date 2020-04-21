@@ -26,7 +26,7 @@ public class Boid : MonoBehaviour
     {
         ls = GameObject.Find("Origin").GetComponent<LightSpawner>();
     }
-   
+
     public void OnDrawGizmos()
     {
     }
@@ -52,30 +52,33 @@ public class Boid : MonoBehaviour
         for (int i = 0; i < targetTransforms.Length; i++)
         {
             targetTransforms[i] = ls.spawnLights().GetComponent<Transform>();
+            //greenState = targetTransforms[i].gameObject.GetComponent<LightController>().states[0];
             targetRend = targetTransforms[i].gameObject.GetComponent<Renderer>();
             if (target != null)
             {
+              //  if (targetTransforms[i].GetComponent<LightStateMachine>().currentState == greenState)
+                //{
                     target = targetTransforms[i].position;
-               }
-               else
-               {
+                }
+                else
+                {
 
-               }
+                }
             }
-        worldPos = transform.position + vel;
-        speed = vel.magnitude;
-        force = CalculateForce();
-        accel = force / mass;
-        vel += accel * Time.deltaTime;
+            worldPos = transform.position + vel;
+            speed = vel.magnitude;
+            force = CalculateForce();
+            accel = force / mass;
+            vel += accel * Time.deltaTime;
 
-        transform.position += vel * Time.deltaTime;
-        if (speed > 0)
-        {
-            Vector3 tempUp = Vector3.Lerp(transform.up, Vector3.up + (accel * bankForce), Time.deltaTime * 3.0f);
-            transform.LookAt(worldPos, tempUp);
-            vel -= (damping * vel * Time.deltaTime);
+            transform.position += vel * Time.deltaTime;
+            if (speed > 0)
+            {
+                Vector3 tempUp = Vector3.Lerp(transform.up, Vector3.up + (accel * bankForce), Time.deltaTime * 3.0f);
+                transform.LookAt(worldPos, tempUp);
+                vel -= (damping * vel * Time.deltaTime);
 
 
+            }
         }
     }
-}

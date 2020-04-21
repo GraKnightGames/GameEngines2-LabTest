@@ -13,7 +13,6 @@ public class LightStateMachine : MonoBehaviour
 {
     public State currentState;
     public State prevState;
- 
     private void OnEnable()
     {
         StartCoroutine(Execute());
@@ -37,14 +36,14 @@ public class LightStateMachine : MonoBehaviour
     }
     IEnumerator Execute()
     {
-        yield return new WaitForSeconds(Random.Range(5, 10));
+        yield return new WaitForSeconds(Random.Range(5f,10f));
         while(true)
         {
             if(currentState != null)
             {
                 currentState.Execute();
             }
-            yield return new WaitForSeconds(1.0f / 5.0f);
+            yield return new WaitForSeconds(Random.Range(5f,10f));
         }
     }
 }

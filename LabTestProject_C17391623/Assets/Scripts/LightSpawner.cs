@@ -35,11 +35,12 @@ public class LightSpawner : MonoBehaviour
             for (int i = 0; i < lightsCount; i++)
             {
                 rotAngle = i * angleGap;
-                rot = Quaternion.AngleAxis(rotAngle, new Vector3(0, 5, 0));
+                rot = Quaternion.AngleAxis(rotAngle, Vector3.up);
                 dir = rot * Vector3.forward;
                 finalDir = dir * rad;
                 pos = origin.position + finalDir;
                 instantiatedPrefab = Instantiate(lightPrefab, pos, rot);
+                instantiatedPrefab.GetComponent<LightController>().myRend = instantiatedPrefab.GetComponent<Renderer>();
                 lightsSpawned++;
             }
         }

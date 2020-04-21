@@ -20,6 +20,7 @@ public class Boid : MonoBehaviour
     public float bankForce = 0.1f;
     public float damping = 0.1f;
     public LightSpawner ls;
+    public State greenState;
 
     private void Start()
     {
@@ -54,16 +55,13 @@ public class Boid : MonoBehaviour
             targetRend = targetTransforms[i].gameObject.GetComponent<Renderer>();
             if (target != null)
             {
-             //   if (targetRend.material = greenMat)
-              //  {
                     target = targetTransforms[i].position;
-               // }
-                //else
-               // {
+               }
+               else
+               {
 
-                //}
+               }
             }
-        }
         worldPos = transform.position + vel;
         speed = vel.magnitude;
         force = CalculateForce();
